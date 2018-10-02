@@ -1,0 +1,122 @@
+body {
+  text-align: center;
+}
+.nav-wrapper {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto; 
+  }
+.container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  border: 1px solid grey;
+  width: 450px;
+  justify-content: space-between;
+  border-radius: 6px;
+}
+.head {
+  height: 100px;
+  width: 100%;
+  background-color: #646864;
+  color: #81eacc;
+}
+.bod {
+  height: 300px;
+  width: 100%;
+  background-color: #ff7070;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.foot {
+  height: 100px;
+  width: 100%;
+  background-color: #646864;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+}
+li {
+  height: 100%;
+  color: #81eacc;
+  padding-left: 15px;
+}
+a {
+  text-decoration: none;
+  color: #81eacc;
+}
+h1 {
+  font-family: 'Exo', sans-serif;
+  font-size: 48px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.submitButton {
+  width: 300px;
+  height: 60px;
+  border: 1px solid #81eacc;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 32px;
+  color: #81eacc;
+}
+.button {
+  align-self: center;
+  padding: 45px;
+  font-family: 'Exo', sans-serif;
+  font-size: 40px;
+}
+.sign {
+  font-family: 'Exo', sans-serif;
+}
+input:not([type]),
+input[type='text']:not(.browser-default),
+input[type='password']:not(.browser-default),
+input[type='email']:not(.browser-default),
+input[type='url']:not(.browser-default),
+input[type='time']:not(.browser-default),
+input[type='date']:not(.browser-default),
+input[type='datetime']:not(.browser-default),
+input[type='datetime-local']:not(.browser-default),
+input[type='tel']:not(.browser-default),
+input[type='number']:not(.browser-default),
+input[type='search']:not(.browser-default),
+textarea.materialize-textarea {
+  background-color: white;
+}
+.site-header {
+    color: #81eacc;
+    display: flex;
+  
+}
+.nav-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #81eacc;
+}
+nav .brand-logo {
+    position: relative;
+    color: #fff;
+    display: inline-block;
+    font-size: 2.1rem;
+    padding: 0;
+}
+nav{
+    background-color: #ff7070;
+}
