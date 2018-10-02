@@ -17,7 +17,7 @@ router.get("/signup", (req, res) => {
 // POST /signup
 router.post("/signup", (req, res) => {
   var signupStrategy = passport.authenticate("local-signup", {
-    successRedirect: "index",
+    successRedirect: "/",
     failureRedirect: "/signup",
     failureFlash: true
   });
@@ -33,7 +33,7 @@ router.get("/login", (req, res) => {
 // POST /login
 router.post("/login", (req, res) => {
   var loginStrategy = passport.authenticate("local-login", {
-    successRedirect: "index",
+    successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true
   });
