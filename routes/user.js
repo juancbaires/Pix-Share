@@ -1,8 +1,13 @@
-var express = require("express");
-var router = express.Router();
-var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
-var passport = require("passport");
+const express = require("express");
+const router = express.Router();
+const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
+const passport = require("passport");
+const User = require("../models/user")
+const Photo = require('../models/photo')
+//^^ requiring the dependencies that my routes need
+
+
 
 // GET /
 router.get("/", (req, res) => {
@@ -16,7 +21,7 @@ router.get("/signup", (req, res) => {
 
 // POST /signup
 router.post("/signup", (req, res) => {
-  var signupStrategy = passport.authenticate("local-signup", {
+  let signupStrategy = passport.authenticate("local-signup", {
     successRedirect: "/",
     failureRedirect: "/signup",
     failureFlash: true
@@ -32,13 +37,18 @@ router.get("/login", (req, res) => {
 
 // POST /login
 router.post("/login", (req, res) => {
-  var loginStrategy = passport.authenticate("local-login", {
+  const loginStrategy = passport.authenticate("local-login", {
     successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true
   });
 
   return loginStrategy(req, res);
+});
+//get /user/:id page
+
+router.get('/user/:id', (req, res) => {
+  User.findById(req.params.id).then(userId => res.render('user', { userId })) 
 });
 
 // GET /logout
@@ -48,9 +58,9 @@ router.get("/logout", (req, res) => {
 });
 
 // Restricted (cool people only!)
-router.get("/secret", (req, res) => {
+router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("secret");
+    Photo.find(req.param).then(photos => res.render('/index'), {photos: photos.url})
   } else {
     res.redirect("/");
   }

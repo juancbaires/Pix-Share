@@ -1,1 +1,7 @@
 <h1>index</h1>
+{{#if currentUser}}
+            <h2>The wall of pics</h2>
+           {{#each photos}}
+        <img src="{{photos.url}}" alt="">
+            {{/each}}
+{{/if}}

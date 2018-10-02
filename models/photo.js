@@ -14,19 +14,19 @@ const Comment = new Schema({
 });
 
 const Photo = new Schema({
-  content: String,
-  createdAt: {
-    type: Date,
-    default: Date.now()
-  },
+  url: String,
   author: {
     type: Schema.Types.ObjectId,
     ref: "User"
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
   },
   comments: [Comment]
 });
 
 module.exports = {
-  Tweet: mongoose.model("Photo", Photo),
+  Photo: mongoose.model("Photo", Photo),
   Comment: mongoose.model("Comment", Comment)
 };

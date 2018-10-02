@@ -21,7 +21,6 @@ body {
   justify-content: space-between;
   border-radius: 6px;
   text-align: center;
-  background-color: #646864;
 }
 
 li {
@@ -79,6 +78,7 @@ textarea.materialize-textarea {
 .site-header {
     color: #81eacc;
     display: flex;
+    background-color: black;
   
 }
 .nav-wrapper{
@@ -93,7 +93,11 @@ nav .brand-logo {
     display: inline-block;
     font-size: 2.1rem;
     padding: 0;
+    background-color: black;
 }
 nav{
-    background-color: #ff7070;
+    background-color: black;
+}
+nav:after{
+  background-color: black;
 }
