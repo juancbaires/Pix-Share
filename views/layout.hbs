@@ -20,16 +20,20 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       {{#if currentUser}}
-      <li class="nav-item active">
+      {{!-- <li class="nav-item active">
         <a class="nav-link" href="/photo/new">+Photo</a>
-      </li>
+      </li> --}}
       <li class="nav-item">
         <a class="nav-link" href="/user/{{currentUser.id}}">Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Log Out</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/index">Wall</a>
+      </li>
       {{else}}
+      
       <li class="nav-item">
         <a class="nav-link disabled" href="/login">Log In</a>
       </li>
@@ -41,8 +45,13 @@
   </div>
 </nav>
     </header>
+    {{#if currentUser}}
+    <h1 class="text-center"></h1>
+    {{else}}
+    <h1 class="text-center">Welcome! Please Sign In</h1>
+    {{/if}}
     {{{body}}}
-    <h1>Welcome! Please Sign In</h1>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

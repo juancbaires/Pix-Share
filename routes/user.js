@@ -50,8 +50,7 @@ router.post('/login', (req, res) => {
 //get /user/:id page
 
 router.get('/user/:id', (req, res) => {
-  User.findById(req.params.id).then(userId => res.render('user', { userId },console.log(userId)));
-  User.findById(req.params.id).then(photos => res.render ("user", {photos}))
+  User.findById(req.params.id).then(userId => res.render('user', { userId }));
 });
 
 //post image upload
@@ -67,7 +66,7 @@ const multerConfig = {
     filename: function(req, file, next) {
       console.log(file);
       const ext = file.mimetype.split('/')[1];
-      next(null, file.fieldname + '-' + Date.now() + '.' + ext);
+      next(null, file.originalname + '-' + Date.now() + '.' + ext);
     }
   }),
   //A means of ensuring only images are uploaded.
@@ -87,18 +86,21 @@ const multerConfig = {
     }
   }
 };
-
+//create
 router.post('/upload', multer(multerConfig).single('photo'), (req,res) =>{
-  //model shit
-    res.render('user');
+const newPhoto = new Photo(req.file);
+newPhoto.save().then(photo => {
+  res.render('user', photo)
+  console.log(photo)
+  console.log(photo)
+}).catch(err => {
+  res.status(400).send("unable to save to database")
 })
-//  });   req.files['gallery'] -> Array
-// router.post('/upload',function(req,res){
-//   let newPhoto = new Photo();
-//   newPhoto.img.data = fs.readFileSync(req.photo.path)
-//   newPhoto.img.contentType = 'image/png';
-//   newPhoto.save();
-//  });
+
+})
+// router.get('/user', (req, res) => {
+//   Photo.find().res
+// });
 // GET /logout
 router.get('/logout', (req, res) => {
   req.logout();
@@ -108,10 +110,9 @@ router.get('/logout', (req, res) => {
 // Restricted (cool people only!)
 router.get('/index', (req, res) => {
   if (req.isAuthenticated()) {
-    router.get('/', (req, res) => {
-      Photo.find().then(photos => res.render('/', { photos }));
-    });
-    res.render('/');
+    Photo.find().then(photo => {
+      res.render('index', {photo})
+    })    
   } else {
     res.redirect('/login');
   }

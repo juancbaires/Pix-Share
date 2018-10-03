@@ -8,6 +8,7 @@ const User = new Schema({
     password: String
   },
   photos: [{
+    path: String,
     type: Schema.Types.ObjectId,
     ref: 'Photo'
   }]

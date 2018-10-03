@@ -17,7 +17,7 @@ const multer = require('multer')
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(parser());
-
+app.use(express.static(__dirname + '/public/photo-storage')); 
 app.use(express.static(__dirname + "/public"));
 
 app.use(parser.urlencoded({extended: true}))

@@ -16,7 +16,7 @@ const createPassword = password =>
     }).then(user => {
       Promise.all([
         Photo.create({
-          path: "../public/photo-storage/TestPic.png",
+          path: "TestPic.jpeg",
           author: user._id,
         }).then(photo => {
           user.photos.push(photo)
@@ -27,3 +27,4 @@ const createPassword = password =>
 
     })
   })
+  
