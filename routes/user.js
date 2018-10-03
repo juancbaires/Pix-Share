@@ -49,6 +49,7 @@ router.post("/login", (req, res) => {
 
 router.get('/user/:id', (req, res) => {
   User.findById(req.params.id).then(userId => res.render('user', { userId })) 
+  Photo.find
 });
 
 // GET /logout
@@ -60,9 +61,12 @@ router.get("/logout", (req, res) => {
 // Restricted (cool people only!)
 router.get("/index", (req, res) => {
   if (req.isAuthenticated()) {
-    Photo.find(req.param).then(photos => res.render('/index'), {photos: photos.url})
+    router.get('/', (req, res) =>{
+      // Photo.find({url}).then(photos => res.render('/', {photos}))
+    });
+    res.render('/')
   } else {
-    res.redirect("/");
+    res.redirect("/login");
   }
 });
 

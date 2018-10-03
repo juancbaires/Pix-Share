@@ -1,4 +1,11 @@
 <h1>Profile Page</h1>
 
 <h2>welcome {{#each userId}}{{local.email}}</h2>
+<div><img src="{{url}}" alt=""></div>
 {{/each}}
+<h2>load image</h2>
+
+<form action="/upload" enctype="multipart/form-data" method="post"></form>
+    <input type="file" name="file">
+    <input type="submit" value="upload">
+</form>
