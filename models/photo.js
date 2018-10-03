@@ -14,7 +14,7 @@ const Comment = new Schema({
 });
 
 const Photo = new Schema({
-  url: String,
+  path: String,
   author: {
     type: Schema.Types.ObjectId,
     ref: "User"

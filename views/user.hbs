@@ -1,11 +1,13 @@
 <h1>Profile Page</h1>
 
 <h2>welcome {{#each userId}}{{local.email}}</h2>
-<div><img src="{{url}}" alt=""></div>
 {{/each}}
 <h2>load image</h2>
-
-<form action="/upload" enctype="multipart/form-data" method="post"></form>
-    <input type="file" name="file">
-    <input type="submit" value="upload">
+{{#each photos}}
+<div><img src="{{photos.path}}" class="img-fluid" alt="Responsive image">
+</div>
+{{/each}}
+ <form action="/upload" enctype="multipart/form-data" method="POST"> 
+   <input type="file" name="photo" />
+   <input type="submit" class="btn btn-primary" value="Upload Photo"/>
 </form>

@@ -1,3 +1,4 @@
+//list of dependencies
 const express = require("express");
 const app = express();
 const flash = require("connect-flash");
@@ -8,6 +9,10 @@ const parser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
 const routes = require('./routes/user')
+const methodOverride = require('method-override')
+const multer = require('multer')
+//multer, multer-gridfs-storage, gridfs-stream, method-override to upload?
+// See if I can get file uploads to work!
 
 app.use(morgan("dev"));
 app.use(cookieParser());
