@@ -51,9 +51,9 @@ router.post('/login', (req, res) => {
 router.get('/user/:id', (req, res) => {
   User.findById(req.params.id).then(userId => res.render('user', { userId }));
 });
-router.get('/user/:id', (req, res) => {
-  Photo.show();
-});
+// router.get('/user/:id', (req, res) => {
+//   Photo.show();
+// });
 //post image upload
 const multerConfig = {
   storage: multer.diskStorage({
@@ -89,7 +89,8 @@ const multerConfig = {
     }
   }
 };
-//create
+//img upload
+
 router.post('/upload', multer(multerConfig).single('photo'), (req, res) => {
   console.log(req.file);
   Photo.create({
@@ -102,16 +103,36 @@ router.post('/upload', multer(multerConfig).single('photo'), (req, res) => {
     });
   });
 });
-// create a comment
-router.post('/comments', (req, res) => {
-  const newComment = new Comment({
-    content: req.body.photocomment
-  });
-  newComment.save().then(comment => {
-    res.render('index', { comment });
-  });
+// delete Single photo
+
+router.delete('/index/:id', (req, res) => {
+  Photo.findByIdAndRemove(req.params.id).then(image => res.redirect('/'));
 });
 
+// create a comment
+router.put('/:id', (req, res) => {
+  let { content } = req.body;
+  Photo.findById({ _id: req.params.id }).then(photo => {
+    photo.comments.push({
+      content,
+      author: req.user_id
+    });
+    photo.save(err => {
+      res.redirect('index');
+    });
+  });
+});
+// update: (req, res) => {
+//   let { content } = req.body;
+//   Tweet.findOne({ _id: req.params.id }).then(tweet => {
+//     tweet.comments.push({
+//       content,
+//       author: req.user._id
+//     });
+//     tweet.save(err => {
+//       res.redirect(`/tweet/${tweet._id}`);
+//     });
+//   });
 // GET /logout
 router.get('/logout', (req, res) => {
   req.logout();
@@ -127,6 +148,16 @@ router.get('/index', (req, res) => {
         // photo.path.slice(21);
         res.render('index', { photo });
       });
+  } else {
+    res.redirect('/login');
+  }
+});
+
+router.delete('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    Photo.findByIdAndRemove({ _id: req.params.id }).then(photo => {
+      res.redirect('index');
+    });
   } else {
     res.redirect('/login');
   }

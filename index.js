@@ -13,7 +13,7 @@ const methodOverride = require('method-override');
 const multer = require('multer');
 //multer, multer-gridfs-storage, gridfs-stream, method-override to upload?
 // See if I can get file uploads to work!
-
+app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(parser());

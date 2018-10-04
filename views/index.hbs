@@ -1,5 +1,5 @@
 {{#if currentUser}}
-<h2 class="text-center">Welcome!</h2>
+<h2 class="text-center">Home</h2>
 
 {{#each photo}}
 {{!-- TODO: need to actually render the image --}}
@@ -9,34 +9,34 @@
     <div>
         <div class="card">
             <img class="card-img-top" src="{{path}}" alt="Card image cap">
+            <div>
+                <form action="/index/{{id}}?_method=DELETE" method="POST" accept-charset="utf-8">
+                    <button type="submit" value="Delete" class="btn btn-danger">Delete Photo</button>
+                </form>
+            </div>
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-                <form action="/comments" method="POST"></form>
-                <label for="exampleFormControlTextarea1">Comment</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <button class="btn btn-primary" id="photobutton" type="submit">Enter Comment</button>
+                <h5 class="card-title">Comments</h5>
+                {{#if comments.length}}
+                {{#each comments}}
+                <p class="card-text">{{content}}</p>
+                {{/each}}
+                {{/if}}
+                <form action="/{{id}}?_method=PUT" method="POST" class="row">
+                    <label for="exampleFormControlTextarea1">Comment</label>
+                    <textarea type="text" name="content" class="form-control" id="" rows="3"></textarea>
+                    <button class="btn btn-primary" id="photobutton" type="submit">Enter Comment</button>
+                </form>
 
             </div>
         </div>
     </div>
 </section>
-{{!-- <form action="/comments" method="POST">
+{{!-- <form action="/index" method="POST">
     <textarea name="photocomment" id="photocomment" cols="30" rows="3"></textarea>
     <button id="photobutton" type="submit">Enter Comment</button>
-</form>
-</div> --}}
-{{/each}}
-
-<div class="comments">
-    {{#each comment}}
-    <p>{{{content}}}</p>
-    {{/each}}
+</form> --}}
 </div>
-
+{{/each}}
 
 {{else}}
 <div class="jumbotron">
