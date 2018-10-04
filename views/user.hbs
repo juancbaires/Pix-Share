@@ -1,18 +1,23 @@
 <section class="test-center">
-<h1 class="text-center">Profile Page</h1>
-<div class="text-center">
-<h2 class="text-center">welcome {{#each userId}}{{local.email}}</h2>
-</div>
-{{/each}}
-<h2 class="text-center">load image</h2>
-<div class="text-center">
- <form action="/upload" enctype="multipart/form-data" method="POST"> 
-   <input type="file" name="photo" />
-   <input type="submit" class="btn btn-primary" value="Upload Photo"/>
-</form>
-</div>
-{{#if photo}}
-<div class="text-center">
-<img class="text-center" src="{{this}}" class="img-fluid" alt="Responsive image">
-</div>
-{{/if}}
+  <h1 class="text-center">Profile Page</h1>
+  <div class="text-center">
+    <h2 class="text-center">Create Album</h2>
+    {{#each userId}}
+    <span class="text-center">
+      {{local.email}}
+    </span>
+  </div>
+  {{/each}}
+  <h2 class="text-center">load image</h2>
+  <div class="text-center">
+    <form action="/upload" enctype="multipart/form-data" method="POST">
+      <input type="file" name="photo" />
+      <input type="submit" class="btn btn-primary" value="Upload Photo" />
+    </form>
+  </div>
+  {{#if photo}}
+  <div class="text-center">
+    <img class="text-center" src="{{this}}" class="img-fluid" alt="Responsive image">
+  </div>
+  {{/if}}
+</section>

@@ -1,8 +1,50 @@
 {{#if currentUser}}
-<h2>The wall of pics</h2>
-{{else}}
-<h1>index</h1>
-{{/if}}
+<h2 class="text-center">Welcome!</h2>
+
 {{#each photo}}
-<img src='{{{path}}}' alt="">
+{{!-- TODO: need to actually render the image --}}
+{{!-- <img src='{{{path}}}' alt=""> --}}
+<section style="max-width: 500px; margin: 0 auto">
+
+    <div>
+        <div class="card">
+            <img class="card-img-top" src="{{path}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <form action="/comments" method="POST"></form>
+                <label for="exampleFormControlTextarea1">Comment</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <button class="btn btn-primary" id="photobutton" type="submit">Enter Comment</button>
+
+            </div>
+        </div>
+    </div>
+</section>
+{{!-- <form action="/comments" method="POST">
+    <textarea name="photocomment" id="photocomment" cols="30" rows="3"></textarea>
+    <button id="photobutton" type="submit">Enter Comment</button>
+</form>
+</div> --}}
 {{/each}}
+
+<div class="comments">
+    {{#each comment}}
+    <p>{{{content}}}</p>
+    {{/each}}
+</div>
+
+
+{{else}}
+<div class="jumbotron">
+    <h1 class="display-4">PixaShare!</h1>
+    <p class="lead">This is a simple heroku app that lets you create an album to share with friends! </p>
+    <hr class="my-4">
+    <p>Made by Juan Baires</p>
+    <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+    <a class="btn btn-primary btn-lg" href="/signup" role="button">New User</a>
+</div>
+{{/if}}

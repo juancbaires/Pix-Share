@@ -4,11 +4,10 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const User = require('../models/user');
-const {Photo} = require('../models/photo');
+const { Photo, Comment } = require('../models/photo');
 const multer = require('multer');
-const fs = require('fs')
-const path = require('path')
-
+const fs = require('fs');
+// const path = require('path');
 //^^ requiring the dependencies that my routes need
 
 // GET /
@@ -52,21 +51,24 @@ router.post('/login', (req, res) => {
 router.get('/user/:id', (req, res) => {
   User.findById(req.params.id).then(userId => res.render('user', { userId }));
 });
-
+router.get('/user/:id', (req, res) => {
+  Photo.show();
+});
 //post image upload
 const multerConfig = {
   storage: multer.diskStorage({
     //Setup where the user's file will go
     destination: function(req, file, next) {
-      console.log('hit destination')
+      console.log('hit destination');
       next(null, './public/photo-storage');
     },
 
     //Then give the file a unique name
     filename: function(req, file, next) {
-      console.log(file);
+      console.log('file: ', file);
+      console.log('originalname: ', file.originalname);
       const ext = file.mimetype.split('/')[1];
-      next(null, file.originalname + '-' + Date.now() + '.' + ext);
+      next(null, file.originalname);
     }
   }),
   //A means of ensuring only images are uploaded.
@@ -74,6 +76,7 @@ const multerConfig = {
     if (!file) {
       next();
     }
+
     const image = file.mimetype.startsWith('image/');
     if (image) {
       console.log('photo uploaded');
@@ -87,20 +90,28 @@ const multerConfig = {
   }
 };
 //create
-router.post('/upload', multer(multerConfig).single('photo'), (req,res) =>{
-const newPhoto = new Photo(req.file);
-newPhoto.save().then(photo => {
-  res.render('user', photo)
-  console.log(photo)
-  console.log(photo)
-}).catch(err => {
-  res.status(400).send("unable to save to database")
-})
+router.post('/upload', multer(multerConfig).single('photo'), (req, res) => {
+  console.log(req.file);
+  Photo.create({
+    path: req.file.originalname,
+    author: req.user._id
+  }).then(photo => {
+    req.user.photos.push(photo);
+    req.user.save(err => {
+      res.render('user');
+    });
+  });
+});
+// create a comment
+router.post('/comments', (req, res) => {
+  const newComment = new Comment({
+    content: req.body.photocomment
+  });
+  newComment.save().then(comment => {
+    res.render('index', { comment });
+  });
+});
 
-})
-// router.get('/user', (req, res) => {
-//   Photo.find().res
-// });
 // GET /logout
 router.get('/logout', (req, res) => {
   req.logout();
@@ -110,9 +121,12 @@ router.get('/logout', (req, res) => {
 // Restricted (cool people only!)
 router.get('/index', (req, res) => {
   if (req.isAuthenticated()) {
-    Photo.find().then(photo => {
-      res.render('index', {photo})
-    })    
+    Photo.find({})
+      .populate('author')
+      .then(photo => {
+        // photo.path.slice(21);
+        res.render('index', { photo });
+      });
   } else {
     res.redirect('/login');
   }

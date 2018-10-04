@@ -1,4 +1,4 @@
-const mongoose = require('../db/connection')
+const mongoose = require('../db/connection');
 const Schema = mongoose.Schema;
 
 const Comment = new Schema({
@@ -9,7 +9,9 @@ const Comment = new Schema({
   },
   author: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    type: String,
+    ref: 'User',
+    default: 'who knows'
   }
 });
 
@@ -17,7 +19,7 @@ const Photo = new Schema({
   path: String,
   author: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
   createdAt: {
     type: Date,
@@ -27,6 +29,6 @@ const Photo = new Schema({
 });
 
 module.exports = {
-  Photo: mongoose.model("Photo", Photo),
-  Comment: mongoose.model("Comment", Comment)
+  Photo: mongoose.model('Photo', Photo),
+  Comment: mongoose.model('Comment', Comment)
 };
