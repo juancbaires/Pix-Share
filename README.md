@@ -25,6 +25,8 @@ To use this application, there are several dependencies that are included in the
 
 Originally I wanted to make an application where users could access eachothers profile to comment on photos. As of now, that is not possible. Only the user that is signed in can access the album. Commenting is possible, but they do not show which user commented. These issues will require some extended work, but for now **PixaShare** is a full crud app that lets you render an album with images on your device.
 
-## Screenshot of the application
+## Screenshots of the application
 
 ![](https://i.imgur.com/PqAO6SLl.png)
+## On phone
+![](https://i.imgur.com/2nbcrxzl.jpg)
