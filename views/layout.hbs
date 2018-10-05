@@ -31,13 +31,13 @@
             <a class="nav-link" href="/photo/new">+Photo</a>
           </li> --}}
           <li class="nav-item">
-            <a class="nav-link" href="/user/{{currentUser.id}}">Create Album</a>
+            <a class="nav-link" href="/user/{{currentUser.id}}">Add Image</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Log Out</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/index">Home</a>
+            <a class="nav-link" href="/index">Pictures</a>
           </li>
           {{else}}
 
@@ -55,7 +55,7 @@
   {{#if currentUser}}
   <h1 class="text-center"></h1>
   {{else}}
-  <h1 class="text-center">Welcome! Please Sign In</h1>
+  <h1 class="text-center">Welcome</h1>
   {{/if}}
   {{{body}}}
 

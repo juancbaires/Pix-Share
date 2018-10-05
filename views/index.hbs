@@ -1,6 +1,5 @@
 {{#if currentUser}}
 <h2 class="text-center">Home</h2>
-
 {{#each photo}}
 {{!-- TODO: need to actually render the image --}}
 {{!-- <img src='{{{path}}}' alt=""> --}}
@@ -15,7 +14,7 @@
                 </form>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Comments</h5>
+                <h5 class="card-title">Comments:</h5>
                 {{#if comments.length}}
                 {{#each comments}}
                 <p class="card-text">{{content}}</p>
@@ -40,8 +39,8 @@
 
 {{else}}
 <div class="jumbotron">
-    <h1 class="display-4">PixaShare!</h1>
-    <p class="lead">This is a simple heroku app that lets you create an album to share with friends! </p>
+    <h1 class="display-4">PixaShare</h1>
+    <p class="lead">This is a heroku app that lets you create an album to share with friends! </p>
     <hr class="my-4">
     <p>Made by Juan Baires</p>
     <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
