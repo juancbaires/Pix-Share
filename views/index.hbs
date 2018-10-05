@@ -1,5 +1,14 @@
-{{#if currentUser}}
+{{#unless currentUser}}
 <h2 class="text-center">Home</h2>
+<div class="jumbotron">
+    <h1 class="display-4">PixaShare</h1>
+    <p class="lead">This is a heroku app that lets you create an album to share with friends! </p>
+    <hr class="my-4">
+    <p>Made by Juan Baires</p>
+    <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
+    <a class="btn btn-primary btn-lg" href="/signup" role="button">New User</a>
+</div>
+{{/unless}}
 {{#each photo}}
 {{!-- TODO: need to actually render the image --}}
 {{!-- <img src='{{{path}}}' alt=""> --}}
@@ -9,9 +18,12 @@
         <div class="card">
             <img class="card-img-top" src="{{path}}" alt="Card image cap">
             <div>
+                {{#if author}}
+
                 <form action="/index/{{id}}?_method=DELETE" method="POST" accept-charset="utf-8">
                     <button style="margin-top: 5px" type="submit" value="Delete" class="btn btn-danger">Delete Photo</button>
                 </form>
+                {{/if}}
             </div>
             <div class="card-body">
                 <h5 class="card-title">Comments:</h5>
@@ -20,6 +32,7 @@
                 <p class="card-text">{{content}}</p>
                 {{/each}}
                 {{/if}}
+
                 <form action="/{{id}}?_method=PUT" method="POST" class="row">
                     <label for="exampleFormControlTextarea1"></label>
                     <textarea type="text" name="content" class="form-control" id="" rows="3"></textarea>
@@ -35,13 +48,12 @@
 </div>
 {{/each}}
 
-{{else}}
-<div class="jumbotron">
+{{!-- {{else}} --}}
+{{!-- <div class="jumbotron">
     <h1 class="display-4">PixaShare</h1>
     <p class="lead">This is a heroku app that lets you create an album to share with friends! </p>
     <hr class="my-4">
     <p>Made by Juan Baires</p>
     <a class="btn btn-primary btn-lg" href="/login" role="button">Login</a>
     <a class="btn btn-primary btn-lg" href="/signup" role="button">New User</a>
-</div>
-{{/if}}
+</div> --}}
