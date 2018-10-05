@@ -39,7 +39,7 @@ router.get('/login', (req, res) => {
 // POST /login
 router.post('/login', (req, res) => {
   const loginStrategy = passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/index',
     failureRedirect: '/login',
     failureFlash: true
   });
@@ -105,9 +105,9 @@ router.post('/upload', multer(multerConfig).single('photo'), (req, res) => {
 });
 // delete Single photo
 
-router.delete('/index/:id', (req, res) => {
-  Photo.findByIdAndRemove(req.params.id).then(image => res.redirect('/'));
-});
+// router.delete('/index/:id', (req, res) => {
+//   Photo.findByIdAndRemove(req.params.id).then(image => res.redirect('/index'));
+// });
 
 // create a comment
 router.put('/:id', (req, res) => {
@@ -142,11 +142,11 @@ router.get('/index', (req, res) => {
     res.redirect('/login');
   }
 });
-
-router.delete('/:id', (req, res) => {
+// delete photo by id
+router.delete('/index/:id', (req, res) => {
   if (req.isAuthenticated()) {
     Photo.findByIdAndRemove({ _id: req.params.id }).then(photo => {
-      res.redirect('index');
+      res.redirect('/index');
     });
   } else {
     res.redirect('/login');
