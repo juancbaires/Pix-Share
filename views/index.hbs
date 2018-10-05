@@ -3,14 +3,14 @@
 {{#each photo}}
 {{!-- TODO: need to actually render the image --}}
 {{!-- <img src='{{{path}}}' alt=""> --}}
-<section style="max-width: 500px; margin: 0 auto">
+<section style="max-width: 500px; margin: 0 auto 15px">
 
     <div>
         <div class="card">
             <img class="card-img-top" src="{{path}}" alt="Card image cap">
             <div>
                 <form action="/index/{{id}}?_method=DELETE" method="POST" accept-charset="utf-8">
-                    <button type="submit" value="Delete" class="btn btn-danger">Delete Photo</button>
+                    <button style="margin-top: 5px" type="submit" value="Delete" class="btn btn-danger">Delete Photo</button>
                 </form>
             </div>
             <div class="card-body">
@@ -21,19 +21,17 @@
                 {{/each}}
                 {{/if}}
                 <form action="/{{id}}?_method=PUT" method="POST" class="row">
-                    <label for="exampleFormControlTextarea1">Comment</label>
+                    <label for="exampleFormControlTextarea1"></label>
                     <textarea type="text" name="content" class="form-control" id="" rows="3"></textarea>
-                    <button class="btn btn-primary" id="photobutton" type="submit">Enter Comment</button>
+                    <button style="margin-top: 5px" class="btn btn-primary" id="photobutton" type="submit">Enter
+                        Comment</button>
                 </form>
 
             </div>
         </div>
     </div>
 </section>
-{{!-- <form action="/index" method="POST">
-    <textarea name="photocomment" id="photocomment" cols="30" rows="3"></textarea>
-    <button id="photobutton" type="submit">Enter Comment</button>
-</form> --}}
+
 </div>
 {{/each}}
 

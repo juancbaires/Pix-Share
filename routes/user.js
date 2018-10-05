@@ -122,17 +122,7 @@ router.put('/:id', (req, res) => {
     });
   });
 });
-// update: (req, res) => {
-//   let { content } = req.body;
-//   Tweet.findOne({ _id: req.params.id }).then(tweet => {
-//     tweet.comments.push({
-//       content,
-//       author: req.user._id
-//     });
-//     tweet.save(err => {
-//       res.redirect(`/tweet/${tweet._id}`);
-//     });
-//   });
+
 // GET /logout
 router.get('/logout', (req, res) => {
   req.logout();
