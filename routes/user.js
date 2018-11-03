@@ -7,7 +7,6 @@ const User = require('../models/user');
 const { Photo, Comment } = require('../models/photo');
 const multer = require('multer');
 const fs = require('fs');
-// const path = require('path');
 //^^ requiring the dependencies that my routes need
 
 // GET /
@@ -51,20 +50,18 @@ router.post('/login', (req, res) => {
 router.get('/user/:id', (req, res) => {
   User.findById(req.params.id).then(userId => res.render('user', { userId }));
 });
-// router.get('/user/:id', (req, res) => {
-//   Photo.show();
-// });
+
 //post image upload
 const multerConfig = {
   storage: multer.diskStorage({
     //Setup where the user's file will go
-    destination: function(req, file, next) {
+    destination: function (req, file, next) {
       console.log('hit destination');
       next(null, './public/photo-storage');
     },
 
     //Then give the file a unique name
-    filename: function(req, file, next) {
+    filename: function (req, file, next) {
       console.log('file: ', file);
       console.log('originalname: ', file.originalname);
       const ext = file.mimetype.split('/')[1];
@@ -72,7 +69,7 @@ const multerConfig = {
     }
   }),
   //A means of ensuring only images are uploaded.
-  fileFilter: function(req, file, next) {
+  fileFilter: function (req, file, next) {
     if (!file) {
       next();
     }
@@ -103,11 +100,6 @@ router.post('/upload', multer(multerConfig).single('photo'), (req, res) => {
     });
   });
 });
-// delete Single photo
-
-// router.delete('/index/:id', (req, res) => {
-//   Photo.findByIdAndRemove(req.params.id).then(image => res.redirect('/index'));
-// });
 
 // create a comment
 router.put('/:id', (req, res) => {
@@ -133,10 +125,12 @@ router.get('/logout', (req, res) => {
 router.get('/index', (req, res) => {
   if (req.isAuthenticated()) {
     Photo.find({})
+    User.find({})
       .populate('author')
       .then(photo => {
         // photo.path.slice(21);
-        res.render('index', { photo });
+        console.log("here is this Console.log!!!")
+        res.render('index', { photo, user });
       });
   } else {
     res.redirect('/login');
