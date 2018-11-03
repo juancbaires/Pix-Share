@@ -25,9 +25,6 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Comments: {{comments.length}}</h5>
-                {{#each userId}}
-                <p class="card-text">{{local.email}}</p>
-                {{/each}}
                 {{#if comments}}
                 {{#each comments}}
                 <p class="card-text">{{content}}</p>

@@ -125,12 +125,9 @@ router.get('/logout', (req, res) => {
 router.get('/index', (req, res) => {
   if (req.isAuthenticated()) {
     Photo.find({})
-    User.find({})
       .populate('author')
       .then(photo => {
-        // photo.path.slice(21);
-        console.log("here is this Console.log!!!")
-        res.render('index', { photo, user });
+        res.render('index', { photo });
       });
   } else {
     res.redirect('/login');
